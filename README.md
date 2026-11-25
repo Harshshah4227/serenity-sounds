@@ -5,3 +5,5 @@ Landing page concept for the Airfoil landing page challenge, 2026. A visitor's w
 This is a prototype: the music engine stands in for an AI model, plan limits and FAQ answers are placeholders, and the sign-up form sends nothing.
 
 Sample photos are CC0 from Wikimedia Commons: adrian aows (fog), Sweet Ice Cream Photography (sea), Alexandre Godreau (house).
+
+Headings are set in Season Mix by Displaay Type Foundry. All rights reserved: the font is not free to reuse.
