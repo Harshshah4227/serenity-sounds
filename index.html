@@ -203,20 +203,33 @@ input[type=range]::-moz-range-thumb{width:18px;height:18px;border:0;border-radiu
 
 /* ------- close ------- */
 .close{background:var(--haze);overflow:hidden}
-.close-in{position:relative;z-index:2;display:grid;grid-template-columns:minmax(0,1fr);justify-items:center;text-align:center;gap:1.7rem;padding-block:clamp(88px,9vw,150px) 0}
-#s-close{width:100%;height:clamp(220px,37vw,600px);margin-top:clamp(0px,1vw,16px)}
-.close h2{font-size:var(--fs-hero);max-width:10.5em}
+/* closing section + footer = one screen, so the last thing on screen is the whole ask; the figure takes what height is left (--foot is measured in JS) */
+.close-in{position:relative;z-index:2;display:grid;grid-template-columns:minmax(0,1fr);grid-template-rows:auto auto auto minmax(var(--fig-min),1fr);--fig-min:140px;justify-items:center;text-align:center;gap:clamp(1.05rem,2.6svh,1.7rem);padding-block:clamp(44px,9.5svh,150px) 0;min-height:min(calc(100svh - var(--foot,116px)),var(--close-max,84vw))}
+#s-close{width:100%;height:100%;min-height:var(--fig-min)}
+.close h2{font-size:min(var(--fs-hero),max(13svh,2.2rem));max-width:10.5em}
 .join{display:flex;background:#fff;border-radius:99px;padding:6px;width:min(100%,500px)}
 .join input{flex:1;min-width:0;border:0;outline:0;background:none;padding:0 1.2em;font-size:1.05rem}
 .join:focus-within{box-shadow:0 0 0 2px var(--oxblood)}
 .join input::placeholder{color:#7d6672;opacity:1}
 .fine{font-size:.92rem;min-height:1.5em}
 footer{position:relative;z-index:2;background:var(--oxblood);color:#f3e6ec}
-footer .wrap{display:flex;flex-wrap:wrap;gap:.4rem 2rem;align-items:center;padding-block:30px 34px;font-size:.92rem}
-footer a{text-decoration:none;padding:.6rem 0}
+footer .wrap{display:flex;gap:2rem;align-items:center;padding-block:30px 34px;font-size:.92rem}
+footer nav{display:flex;gap:0 2rem}
+footer a{text-decoration:none;display:inline-flex;align-items:center;min-height:44px}
 footer a:hover{text-decoration:underline;text-underline-offset:.3em}
 footer .sp{margin-left:auto}
-@media (max-width:1000px){footer .sp{margin-left:0;width:100%}}
+@media (max-width:1120px){
+  footer .wrap{flex-wrap:wrap;justify-content:space-between;gap:2px 2rem;padding-block:20px 22px}
+  footer .sp{margin-left:0;width:100%;opacity:.8;font-size:.86rem;padding-top:4px}
+}
+@media (max-width:1000px){.close-in{--close-max:98vw}}
+@media (max-width:600px){
+  .close-in{--close-max:132vw;--fig-min:110px}
+  footer .wrap{display:grid;grid-template-columns:minmax(0,1fr);gap:4px;justify-content:stretch;padding-block:20px calc(20px + env(safe-area-inset-bottom,0px))}
+  footer nav{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}
+  footer .logo{justify-self:start}
+  footer .sp{padding-top:8px;text-wrap:balance}
+}
 
 /* ------- dock ------- */
 .dock{position:fixed;z-index:20;left:50%;bottom:calc(18px + env(safe-area-inset-bottom,0px));width:min(480px,calc(100% - 32px));transform:translate(-50%,160%);background:#fff;color:var(--oxblood);border-radius:99px;padding:7px;display:flex;align-items:center;gap:12px;box-shadow:0 18px 50px -14px rgb(53 9 28 / .5);transition:transform .6s var(--ease),visibility .6s;visibility:hidden}
@@ -293,6 +306,7 @@ dialog:focus{outline:0}
   .step,.step:last-child{min-height:100svh;align-content:center;padding:40px var(--gut-r) 40px 0;background:none}
   :root{--fs-hero:clamp(2.2rem,6vw,3.4rem);--fs-h2:clamp(1.7rem,4.4vw,2.6rem)}
   #s-hero,#s-mo{max-width:340px}
+  .close-in{--fig-min:64px;padding-top:22px;gap:.85rem}.close h2{max-width:none;font-size:2.2rem}
 }
 @media (max-width:480px){
   .composer{padding:16px 16px 12px;border-radius:20px}
@@ -315,6 +329,8 @@ dialog:focus{outline:0}
   .now{flex-wrap:wrap}.now .btn{width:100%}
   .dock .btn{padding:0 1em}
   .join{flex-direction:column;border-radius:22px;gap:6px}.join input{min-height:48px}
+  .close h2{font-size:1.95rem}
+  .close .join{flex-direction:row;border-radius:99px;gap:0}.close .join input{padding:0 .2em 0 1em;font-size:1rem}.close .join .btn{padding:0 1em}
 }
 @media (prefers-reduced-motion:reduce){
   *{transition-duration:.01ms!important;scroll-behavior:auto!important}
@@ -485,7 +501,7 @@ dialog:focus{outline:0}
 
 <footer><div class="wrap">
   <a class="logo" style="margin:0" href="#top">Serenity Sounds</a>
-  <a href="#how">How it works</a><a href="#history">Sound history</a><a href="#questions">Questions</a>
+  <nav aria-label="Footer"><a href="#how">How it works</a><a href="#moments">Moments</a><a href="#history">Sound history</a><a href="#questions">Questions</a></nav>
   <span class="sp">Concept for the Airfoil landing page challenge, 2026</span>
 </div></footer>
 
@@ -796,7 +812,8 @@ const phone = () => innerWidth <= 860;
 const fit = (x, y, w, h) => ({ x: x + w / 2, y: y + h / 2, r: Math.min(w, h) / 2 - 10, g: phone() ? 1.25 : 1.5 });
 const heroP = new Plate($('#c-hero'), phone() ? 15000 : 32000, fit, $('#s-hero'));
 const howP = new Plate($('#c-how'), phone() ? 16000 : 34000, (w, h) => ({ x: w / 2, y: h / 2, r: Math.min(w, h) * (phone() ? .485 : .43), g: phone() ? 1.2 : 1.45 }));
-const closeP = new Plate($('#c-close'), phone() ? 16000 : 46000, (x, y, w, h) => { const r = Math.min(w * .5, h * 1.02); return { x: x + w / 2, y: y + r + 12, r, g: phone() ? 1.3 : 1.6 }; }, $('#s-close'));
+const closeP = new Plate($('#c-close'), phone() ? 16000 : 46000, (x, y, w, h) => { const r = Math.min(w * .5, Math.max(h * 1.02, w * .41)); return { x: x + w / 2, y: y + r + 12, r, g: phone() ? 1.3 : 1.6 }; }, $('#s-close'));
+new ResizeObserver(() => document.documentElement.style.setProperty('--foot', $('footer').offsetHeight + 'px')).observe($('footer'));
 heroP.pointer($('#hero')); closeP.pointer($('#close'));
 
 const start = makeTrack('Rain on the window, and nowhere to be', { hue: 256, key: 3, air: 'rain', scale: 'dorian', bpm: 57, bright: .37 });
