@@ -26,7 +26,7 @@
   --serif:"Newsreader","Iowan Old Style",Georgia,serif;
   --gut-l:max(clamp(20px,4vw,64px),env(safe-area-inset-left,0px));
   --gut-r:max(clamp(20px,4vw,64px),env(safe-area-inset-right,0px));
-  --fs-hero:clamp(2.85rem,6.5vw,6.6rem);
+  --fs-hero:clamp(2.5rem,6.3vw,6.6rem);
   --fs-h2:clamp(2.3rem,4.9vw,4.9rem);
   --fs-h3:clamp(1.9rem,3.3vw,3.2rem);
   --fs-lead:clamp(1.06rem,1.35vw,1.3rem);
@@ -63,14 +63,16 @@ canvas.grains{position:absolute;inset:0;width:100%;height:100%;display:block;poi
 /* ------- nav ------- */
 .nav{position:absolute;inset:0 0 auto;z-index:5}
 .nav .wrap{display:flex;align-items:center;gap:2rem;min-height:84px}
-.logo{display:inline-flex;align-items:center;gap:.6rem;font-weight:500;font-size:1.34rem;letter-spacing:-.035em;text-decoration:none;margin-right:auto}
+.logo{display:inline-flex;align-items:center;gap:.6rem;white-space:nowrap;font-weight:500;font-size:1.34rem;letter-spacing:-.035em;text-decoration:none;margin-right:auto}
 .nav a.l{text-decoration:none;font-size:.95rem;padding:.7rem 0}
 .nav a.l:hover{text-decoration:underline;text-underline-offset:.3em}
 
 /* ------- hero ------- */
 .hero{background:var(--haze);overflow:hidden}
-.hero-in{position:relative;z-index:2;display:grid;grid-template-columns:minmax(0,1fr);align-content:center;min-height:min(100svh,960px);padding-block:112px 64px}
-.hero-col{width:min(100%,690px);display:grid;grid-template-columns:minmax(0,1fr);gap:clamp(1.2rem,2.1vw,1.9rem)}
+.hero-in{position:relative;z-index:2;display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:clamp(28px,3.6vw,64px);align-items:center;min-height:min(100svh,960px);padding-block:104px 40px}
+.hero-fig{align-self:stretch;display:grid;grid-template-rows:minmax(300px,1fr) auto;gap:14px;margin-right:calc(var(--gut-r) * -.5)}
+.slot{min-width:0;pointer-events:none}
+.hero-col{min-width:0;display:grid;grid-template-columns:minmax(0,1fr);gap:clamp(1.2rem,2.1vw,1.9rem)}
 h1{font-size:var(--fs-hero);line-height:.93}
 .composer{background:#fff;border-radius:22px;padding:20px 20px 14px;display:grid;gap:10px;max-width:620px;box-shadow:0 1px 0 rgb(53 9 28 / .06),0 24px 60px -30px rgb(53 9 28 / .35)}
 .composer textarea{border:0;outline:0;resize:none;width:100%;background:none;font:400 1.42rem/1.3 var(--serif);letter-spacing:-.01em;height:3.7rem;padding:0}
@@ -95,11 +97,11 @@ h1{font-size:var(--fs-hero);line-height:.93}
 .now>div{min-width:0;flex:1}
 .now b{display:block;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .now small{display:block;font-size:.88rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-variant-numeric:tabular-nums}
-.reading{position:absolute;right:var(--gut-r);bottom:30px;z-index:2;text-align:right;font-size:.86rem;line-height:1.4;font-variant-numeric:tabular-nums}
+.reading{text-align:right;margin-right:calc(var(--gut-r) * .5);font-size:.86rem;line-height:1.4;font-variant-numeric:tabular-nums}
 
 /* ------- how ------- */
 .how{background:var(--paper)}
-.how-grid{display:grid;grid-template-columns:minmax(0,1.18fr) minmax(0,1fr);position:relative}
+.how-grid{display:grid;grid-template-columns:minmax(0,1.18fr) minmax(0,1fr);position:relative;background:inherit}
 .stage{position:sticky;top:0;height:100svh;overflow:hidden}
 .steps{padding-right:var(--gut-r)}
 .step{min-height:100svh;display:grid;align-content:center;gap:1.5rem;padding-block:64px}
@@ -132,11 +134,13 @@ input[type=range]::-moz-range-thumb{width:18px;height:18px;border:0;border-radiu
 
 /* ------- moments ------- */
 .moments{background:var(--ember);padding-block:clamp(88px,11vw,170px);overflow:hidden}
-.moments .wrap{z-index:2;display:grid;gap:clamp(2.2rem,4vw,4rem);position:relative}
+.moments .wrap{z-index:2;display:grid;grid-template-columns:minmax(0,1.42fr) minmax(0,1fr);gap:clamp(2rem,4vw,4rem) clamp(16px,2.4vw,44px);position:relative}
+.moments .lead{grid-column:1/-1}
+#s-mo{margin-right:calc(var(--gut-r) * -.6)}
 .moments .lead{max-width:30em}
 .hours{display:grid}
 .hours{justify-items:start}
-.hours button{display:grid;grid-template-columns:clamp(58px,9vw,150px) auto auto;column-gap:clamp(0px,2vw,34px);align-items:baseline;text-align:left;padding:.16em 0;font-weight:300;font-size:clamp(2.3rem,7.6vw,7.6rem);letter-spacing:-.05em;line-height:1.02}
+.hours button{display:grid;grid-template-columns:clamp(58px,9vw,150px) auto auto;column-gap:clamp(0px,2vw,34px);align-items:baseline;text-align:left;padding:.16em 0;font-weight:300;font-size:clamp(2.3rem,6.7vw,7rem);letter-spacing:-.05em;line-height:1.06;white-space:nowrap}
 .hours span{opacity:.5;transition:opacity .45s var(--ease)}
 .hours button:hover span{opacity:.75}
 .hours button[aria-pressed=true] span{opacity:1}
@@ -180,7 +184,8 @@ input[type=range]::-moz-range-thumb{width:18px;height:18px;border:0;border-radiu
 
 /* ------- close ------- */
 .close{background:var(--haze);overflow:hidden}
-.close-in{position:relative;z-index:2;display:grid;justify-items:center;text-align:center;gap:1.7rem;padding-block:clamp(88px,9vw,150px) clamp(330px,44vw,720px)}
+.close-in{position:relative;z-index:2;display:grid;grid-template-columns:minmax(0,1fr);justify-items:center;text-align:center;gap:1.7rem;padding-block:clamp(88px,9vw,150px) 0}
+#s-close{width:100%;height:clamp(220px,37vw,600px);margin-top:clamp(0px,1vw,16px)}
 .close h2{font-size:var(--fs-hero);max-width:10.5em}
 .join{display:flex;background:#fff;border-radius:99px;padding:6px;width:min(100%,500px)}
 .join input{flex:1;min-width:0;border:0;outline:0;background:none;padding:0 1.2em;font-size:1.05rem}
@@ -192,6 +197,7 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:.4rem 2rem;align-items:center;paddi
 footer a{text-decoration:none;padding:.6rem 0}
 footer a:hover{text-decoration:underline;text-underline-offset:.3em}
 footer .sp{margin-left:auto}
+@media (max-width:1000px){footer .sp{margin-left:0;width:100%}}
 
 /* ------- dock ------- */
 .dock{position:fixed;z-index:20;left:50%;bottom:calc(18px + env(safe-area-inset-bottom,0px));width:min(480px,calc(100% - 32px));transform:translate(-50%,160%);background:#fff;color:var(--oxblood);border-radius:99px;padding:7px;display:flex;align-items:center;gap:12px;box-shadow:0 18px 50px -14px rgb(53 9 28 / .5);transition:transform .6s var(--ease),visibility .6s;visibility:hidden}
@@ -217,20 +223,38 @@ dialog::backdrop{background:rgb(53 9 28 / .55)}
 
 @media (max-width:1080px){.wall{grid-template-columns:repeat(3,minmax(0,1fr))}.nav a.l{display:none}}
 @media (max-width:860px){
-  .hero-in{min-height:0;align-content:start;padding-block:100px calc(88vw + 34px)}
-  .reading{left:var(--gut-l);right:auto;bottom:14px;text-align:left;font-size:.8rem}
+  :root{--fs-hero:clamp(2.45rem,10.8vw,5.4rem);--fs-h2:clamp(2.1rem,8vw,4rem)}
+  .hero-in{grid-template-columns:minmax(0,1fr);min-height:0;padding-block:100px 24px;gap:20px}
+  .hero-col,.composer,.now{max-width:680px}
+  .hero-fig{grid-template-rows:auto auto;margin-right:0}
+  #s-hero,#s-mo{width:100%;max-width:560px;aspect-ratio:1;margin-inline:auto}
+  .reading{text-align:left;margin-right:0;font-size:.84rem}
   .reading span{display:none}
   .tries span{width:100%}
   .how-grid{display:block}
-  .stage{height:46svh;z-index:1}
-  .steps{padding:0 var(--gut-r) 0 var(--gut-l);position:relative}
-  .step{min-height:92svh;align-content:start;padding-block:24px 110px;gap:1.1rem}
+  .stage{height:44svh;min-height:230px;z-index:2;overflow:visible;background:inherit}
+  .stage::after{content:"";position:absolute;inset:100% 0 auto;height:26px;background:inherit;-webkit-mask-image:linear-gradient(#000,transparent);mask-image:linear-gradient(#000,transparent);pointer-events:none}
+  .steps{padding:0 var(--gut-r) 0 var(--gut-l);position:relative;z-index:1}
+  .step{min-height:64svh;align-content:start;padding-block:34px 90px;gap:1.1rem}
+  .step:last-child{min-height:0;padding-bottom:130px}
+  .said,.photos,.deck,.pal{max-width:620px}
   .photos button{aspect-ratio:1}
-  .hist-head,.ask .wrap{grid-template-columns:1fr}
+  .hist-head,.ask .wrap{grid-template-columns:minmax(0,1fr)}
   .wall{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .hours button{grid-template-columns:58px auto auto;column-gap:12px}
-  .moments{padding-bottom:84vw}
+  .moments .wrap{grid-template-columns:minmax(0,1fr)}
+  .moments{padding-bottom:24px}
+  .hours button{grid-template-columns:58px auto auto;column-gap:12px;font-size:clamp(1.7rem,8.4vw,4.4rem)}
   .ask details p{padding-right:0}
+}
+/* phones on their side: keep the figure beside the steps instead of above them */
+@media (max-width:920px) and (max-height:520px){
+  .how-grid{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1fr)}
+  .stage{height:100svh;min-height:0;background:none}
+  .stage::after{content:none}
+  .steps{padding-left:0}
+  .step,.step:last-child{min-height:100svh;align-content:center;padding-block:40px}
+  :root{--fs-hero:clamp(2.2rem,6vw,3.4rem);--fs-h2:clamp(1.7rem,4.4vw,2.6rem)}
+  #s-hero,#s-mo{max-width:340px}
 }
 @media (max-width:480px){
   .composer{padding:16px 16px 12px;border-radius:20px}
@@ -241,6 +265,15 @@ dialog::backdrop{background:rgb(53 9 28 / .55)}
   .tile small span:last-child{display:none}
   .now .btn{padding:0 1em}
   .join .btn{padding:0 1.15em}
+}
+@media (max-width:360px){
+  .nav .wrap{gap:1rem}.nav .logo{font-size:1.18rem}
+  .composer-bar,.photo-slot{flex-wrap:wrap;gap:10px}
+  .composer .btn{width:100%}
+  .up{flex-basis:100%;height:46px}
+  .now{flex-wrap:wrap}.now .btn{width:100%}
+  .dock .btn{padding:0 1em}
+  .join{flex-direction:column;border-radius:22px;gap:6px}.join input{min-height:48px}
 }
 @media (prefers-reduced-motion:reduce){
   *{transition-duration:.01ms!important;scroll-behavior:auto!important}
@@ -300,8 +333,10 @@ dialog::backdrop{background:rgb(53 9 28 / .55)}
         <button class="btn ghost sm" type="button" data-join="keep">Keep this track</button>
       </div>
     </div>
-  </div></div>
-  <p class="reading"><b id="rd-mode" style="font-weight:500"></b><br><span>Pitch, scale, tempo and weather draw this shape.</span></p>
+  </div>
+  <div class="hero-fig"><div class="slot" id="s-hero"></div>
+    <p class="reading"><b id="rd-mode" style="font-weight:500"></b><br><span>Pitch, scale, tempo and weather draw this shape.</span></p></div>
+  </div>
 </section>
 
 <section class="how plate" id="how" aria-label="How it works">
@@ -353,6 +388,7 @@ dialog::backdrop{background:rgb(53 9 28 / .55)}
     <h2 class="vh" id="mo-h">Moments</h2>
     <p class="lead">There is a sound for the hour you are in. Press one to listen.</p>
     <div class="hours" id="hours"></div>
+    <div class="slot" id="s-mo"></div>
   </div>
 </section>
 
@@ -395,6 +431,7 @@ dialog::backdrop{background:rgb(53 9 28 / .55)}
       <button class="btn" type="submit">Start free</button>
     </form>
     <p class="fine" aria-live="polite">Three tracks a day, free. No card needed.</p>
+    <div class="slot" id="s-close"></div>
   </div>
 </section>
 </main>
@@ -499,8 +536,8 @@ function bake(t) {
   return { F, DX, DY };
 }
 class Plate {
-  constructor(cv, n, place, dust = 0) {
-    this.cv = cv; this.n = n; this.place = place; this.dust = Math.floor(n * dust);
+  constructor(cv, n, place, slot) {
+    const dust = 0; this.slot = slot; this.cv = cv; this.n = n; this.place = place; this.dust = Math.floor(n * dust);
     this.x = new Float32Array(n); this.y = new Float32Array(n); this.tx = new Float32Array(n); this.ty = new Float32Array(n);
     this.sp = new Float32Array(n); this.buf = new Float32Array(n * 2); this.seed = new Float32Array(n);
     for (let i = 0; i < n; i++) { const a = Math.random() * 6.283, r = Math.sqrt(Math.random()); this.x[i] = Math.cos(a) * r; this.y[i] = Math.sin(a) * r; this.sp[i] = .035 + Math.random() * .06; this.seed[i] = Math.random(); }
@@ -520,12 +557,12 @@ class Plate {
       gl.bindBuffer(gl.ARRAY_BUFFER, this.bp); const lp = gl.getAttribLocation(p, 'p'); gl.enableVertexAttribArray(lp); gl.vertexAttribPointer(lp, 2, gl.FLOAT, false, 0, 0);
       gl.enable(gl.BLEND); gl.blendFunc(gl.ONE, gl.ONE_MINUS_SRC_ALPHA);
     }
-    new ResizeObserver(() => { this.size(); this.draw(); }).observe(cv); this.size();
+    new ResizeObserver(() => { this.size(); this.draw(); }).observe(cv); if (slot) new ResizeObserver(() => { this.size(); this.draw(); }).observe(slot); this.size();
     new IntersectionObserver(e => { this.vis = e[0].isIntersecting; }, { rootMargin: '80px' }).observe(cv);
   }
   size() {
     this.dpr = Math.min(2, devicePixelRatio || 1); const r = this.cv.getBoundingClientRect(); this.W = r.width || 1; this.H = r.height || 1;
-    this.cv.width = Math.round(this.W * this.dpr); this.cv.height = Math.round(this.H * this.dpr); this.p = this.place(this.W, this.H);
+    this.cv.width = Math.round(this.W * this.dpr); this.cv.height = Math.round(this.H * this.dpr); if (this.slot) { const q = this.slot.getBoundingClientRect(); this.p = this.place(q.left - r.left, q.top - r.top, q.width, q.height); } else this.p = this.place(this.W, this.H);
   }
   figure(t, shake = 1) { this.fld = bake(t); this.mode = 'figure'; this.shake = shake; if (REDUCED) this.settle(160); }
   toTargets(pts) {
@@ -679,9 +716,11 @@ const Sound = {
 
 /* ---------- page ---------- */
 const phone = () => innerWidth <= 860;
-const heroP = new Plate($('#c-hero'), phone() ? 15000 : 32000, (w, h) => phone() ? { x: w / 2, y: h - w * .51, r: w * .41, g: 1.25 } : { x: w * (w > 1500 ? .74 : .755), y: h * .515, r: Math.min(h * .425, w * .232), g: 1.5 });
+/* centred in the slot the layout gives it, never larger */
+const fit = (x, y, w, h) => ({ x: x + w / 2, y: y + h / 2, r: Math.min(w, h) / 2 - 10, g: phone() ? 1.25 : 1.5 });
+const heroP = new Plate($('#c-hero'), phone() ? 15000 : 32000, fit, $('#s-hero'));
 const howP = new Plate($('#c-how'), phone() ? 16000 : 34000, (w, h) => ({ x: w / 2, y: h / 2, r: Math.min(w, h) * .43, g: phone() ? 1.2 : 1.45 }));
-const closeP = new Plate($('#c-close'), phone() ? 16000 : 46000, (w, h) => phone() ? { x: w / 2, y: h - w * .12, r: w * .6, g: 1.3 } : { x: w / 2, y: h + w * .015, r: w * .4, g: 1.6 });
+const closeP = new Plate($('#c-close'), phone() ? 16000 : 46000, (x, y, w, h) => { const r = Math.min(w * .5, h * 1.02); return { x: x + w / 2, y: y + r + 12, r, g: phone() ? 1.3 : 1.6 }; }, $('#s-close'));
 heroP.pointer($('#hero')); closeP.pointer($('#close'));
 
 const start = makeTrack('Rain on the window, and nowhere to be', { hue: 256, key: 3, air: 'rain', scale: 'dorian', bpm: 57, bright: .37 });
@@ -762,7 +801,7 @@ HOURS.forEach(([h, n, o], i) => {
   b.addEventListener('click', () => { const was = b.getAttribute('aria-pressed') === 'true'; $$('#hours button').forEach(x => x.setAttribute('aria-pressed', x === b)); $('#moments').style.backgroundColor = css(plateOf(MC[i])); if (!was) moP.figure(b._t, 1); if (was) toggle(b._t); else Sound.play(b._t); });
   $('#hours').append(b);
 });
-const moP = new Plate($('#c-mo'), phone() ? 12000 : 26000, (w, h) => phone() ? { x: w * .5, y: h - w * .42, r: w * .42, g: 1.25 } : { x: w * .815, y: h * .5, r: Math.min(h * .44, w * .235), g: 1.5 });
+const moP = new Plate($('#c-mo'), phone() ? 12000 : 26000, fit, $('#s-mo'));
 const moT = $$('#hours button').map(b => b._t); moP.figure(moT[2], 0); moP.settle(110); moP.pointer($('#moments'));
 
 /* history */
